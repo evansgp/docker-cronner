@@ -7,3 +7,6 @@ From:
   - https://www.ekito.fr/people/run-a-cron-job-with-docker/
 
 sudo docker run -t -i ekito/cron-example
+
+https://docs.docker.com/engine/tutorials/dockerimages/
+https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
