@@ -1,11 +1,13 @@
 FROM ubuntu:latest
 MAINTAINER Gareth Evans <evans.g.p@gmail.com>
 
-RUN apt-get update
-RUN apt-get install cron
+RUN apt-get update && apt-get -y install cron dnsutils
 
-ADD crontab /etc/cron.d/hello-cron
-RUN chmod 0644 /etc/cron.d/hello-cron
+ADD crontab /etc/cron.d/crontab
+RUN /usr/bin/crontab /etc/cron.d/crontab
+
+ADD ddns-route53.sh /app/ddns-route53.sh
+RUN chmod +x /app/ddns-route53.sh
 
 RUN touch /var/log/cron.log
 
