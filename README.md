@@ -1,13 +1,11 @@
 # docker-ddns
 
-Uses a bash script to run the AWS CLI to update route53.
+Uses a [bash script](https://github.com/mthssdrbrg/ddns-route53/blob/master/ddns-route53) to run the AWS CLI to update route53 from opendns.com.
 
-From:
-  - https://github.com/mthssdrbrg/ddns-route53/blob/master/ddns-route53
-  - https://www.ekito.fr/people/run-a-cron-job-with-docker/
+Based on ubuntu:latest.
 
-sudo docker run -t -i ekito/cron-example
+It is very large and bloated and not at all re-usable.
 
-https://docs.docker.com/engine/tutorials/dockerimages/
-https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
-https://docs.docker.com/engine/examples/
+TODO:
+  - base off alpine?
+  - put everything in envs
