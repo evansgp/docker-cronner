@@ -1,1 +1,1 @@
-* * * * * echo "Hello world" >> /var/log/cron.log
+*/15 * * * * /app/ddns-route53.sh -z Z29HCIYII2AHSL -r home.gareth.id.au >> /var/log/cron.log
