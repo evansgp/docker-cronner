@@ -1,11 +1,10 @@
 FROM ubuntu:latest
 MAINTAINER Gareth Evans <evans.g.p@gmail.com>
 
-RUN apt-get update && apt-get -y install python-pip && pip install --upgrade pip
-
+RUN apt -y update && apt -y upgrade
+RUN apt -y install cron dnsutils python-pip
+RUN pip install --upgrade pip
 RUN pip install awscli
-
-RUN apt-get -y install cron dnsutils 
 
 ADD crontab /etc/cron.d/crontab
 RUN /usr/bin/crontab /etc/cron.d/crontab
