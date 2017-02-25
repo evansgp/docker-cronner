@@ -1,17 +1,19 @@
-FROM ubuntu:latest
+FROM alpine:latest
 MAINTAINER Gareth Evans <evans.g.p@gmail.com>
 
-RUN apt -y update && apt -y upgrade
-RUN apt -y install cron dnsutils python-pip
-RUN pip install --upgrade pip
-RUN pip install awscli
+RUN apk update && apk upgrade
 
-ADD crontab /etc/cron.d/crontab
-RUN /usr/bin/crontab /etc/cron.d/crontab
+COPY tasks/ /etc/periodic/
+RUN chmod -R +x /etc/periodic
 
-ADD ddns-route53.sh /app/ddns-route53.sh
-RUN chmod +x /app/ddns-route53.sh
+RUN apk add bash python bind-tools && \
+    apk add py-pip && \
+    pip install --upgrade pip && \
+    pip install awscli && \
+    apk --purge -v del py-pip && \
+    rm /var/cache/apk/*
 
-RUN touch /var/log/cron.log
+ENV DDNS_ROUTE53_ZONE_ID Z29HCIYII2AHSL
+ENV DDNS_ROUTE53_RECORD_SET home.gareth.id.au.
 
-CMD cron && tail -f /var/log/cron.log
+CMD ["crond", "-f", "-d", "8"]
