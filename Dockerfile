@@ -13,7 +13,4 @@ RUN apk add bash python bind-tools && \
     apk --purge -v del py-pip && \
     rm /var/cache/apk/*
 
-ENV DDNS_ROUTE53_ZONE_ID Z29HCIYII2AHSL
-ENV DDNS_ROUTE53_RECORD_SET home.gareth.id.au.
-
 CMD ["crond", "-f", "-d", "8"]
