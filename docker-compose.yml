@@ -2,10 +2,13 @@ version: "3"
 services:
   ddns:
     build: .
-    container_name: ddns
+    container_name: cronner
     restart: always
     environment:
+      - SSH_AUTH_SOCK=/ssh-agent
       - DDNS_ROUTE53_ZONE_ID=Z29HCIYII2AHSL
       - DDNS_ROUTE53_RECORD_SET=home.gareth.id.au.
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
+    volumes:
+      - $SSH_AUTH_SOCK:/ssh-agent
