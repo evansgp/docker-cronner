@@ -1,11 +1,8 @@
-FROM alpine:latest
+FROM alpine:3.5
 
-RUN apk update && \
-    apk upgrade && \
-    apk add bash python py-pip bind-tools openssh-client && \
+RUN apk add --no-cache bash python py-pip bind-tools openssh-client && \
     pip install --upgrade pip awscli && \
-    apk --purge -v del py-pip && \
-    rm /var/cache/apk/*
+    apk --purge -v del py-pip
 
 COPY tasks/ /etc/periodic/
 RUN chmod -R +x /etc/periodic
